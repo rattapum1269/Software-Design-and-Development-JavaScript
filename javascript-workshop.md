@@ -305,10 +305,95 @@ number /= 2;          // เท่ากับ number = number / 2
 2. เขียนโปรแกรม กำหนดชื่อสินค้า ราคาสินค้า คำนวณราคาสินค้าที่รวม VAT 7% แล้วแสดงผลการคำนวณ
 
 ### บันทึกผลการทดลอง 2.2
-```html
-[บันทึกโค้ด ที่นี่]
+```2.2.1.html
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  
+    <title>คำนวณเกรดเฉลี่ย (GPA)</title>
+   
+</head>
+<body>
+    <div class="container">
+        <h2>คำนวณเกรดเฉลี่ย (GPA)</h2>
+        <label>math: <input type="number" id="subject1" min="0" max="100"></label><br>
+        <label>Bio: <input type="number" id="subject2" min="0" max="100"></label><br>
+        <label>com: <input type="number" id="subject3" min="0" max="100"></label><br>
+        <button onclick="calculateAverage()">คำนวณ</button>
+
+        <h3>ผลลัพธ์</h3>
+        <p><strong>คะแนนเฉลี่ย :</strong> <span id="average">-</span></p>
+        <p><strong>เกรดเฉลี่ย :</strong> <span id="gpa">-</span></p>
+    </div>
+
+    <script src="gard.js"></script>
+</body>
+</html>
+2.2.1.js
+function calculateAverage() {
+    // รับค่าคะแนนจาก input และแปลงเป็นตัวเลข
+    let subject1 = parseFloat(document.getElementById("subject1").value) || 0;
+    let subject2 = parseFloat(document.getElementById("subject2").value) || 0;
+    let subject3 = parseFloat(document.getElementById("subject3").value) || 0;
+
+    // คำนวณคะแนนเฉลี่ย
+    let averageScore = (subject1 + subject2 + subject3) / 3;
+
+    // แปลงคะแนน 100 เป็นเกรด 4.00
+    let gpa = (averageScore / 100) * 4;
+    if (gpa > 4) gpa = 4.00; 
+
+    
+    document.getElementById("average").textContent = averageScore.toFixed(2); // แสดงคะแนนเฉลี่ย 
+    document.getElementById("gpa").textContent = gpa.toFixed(2); // แสดงเกรดเฉลี่ย 
+}
+2.2.2.html
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+    <title>คำนวณราคาสินค้ารวม VAT</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h2>คำนวณราคาสินค้ารวม VAT</h2>
+        <label>ชื่อสินค้า: <input type="text" id="product-name"></label><br>
+        <label>ราคาสินค้า: <input type="number" id="product-price" min="0"></label><br>
+        <button onclick="calculateVAT()">คำนวณ</button>
+
+        <h3>ผลลัพธ์</h3>
+        <p><strong>ชื่อสินค้า:</strong> <span id="output-name">-</span></p>
+        <p><strong>ราคาสินค้า (ไม่รวม VAT):</strong> <span id="output-price">-</span> บาท</p>
+        <p><strong>VAT 7%:</strong> <span id="output-vat">-</span> บาท</p>
+        <p><strong>ราคาสินค้ารวม VAT:</strong> <span id="output-total">-</span> บาท</p>
+    </div>
+
+    <script src="vat.js"></script>
+</body>
+</html>
+
+2.2.2.js
+function calculateVAT() {
+   
+    let productName = document.getElementById("product-name").value;
+    let productPrice = parseFloat(document.getElementById("product-price").value) || 0;
+
+    // คำนวณ VAT 7%
+    let vatAmount = productPrice * 0.07;
+    let totalPrice = productPrice + vatAmount;
+
+    
+    document.getElementById("output-name").textContent = productName || "-";
+    document.getElementById("output-price").textContent = productPrice.toFixed(2);
+    document.getElementById("output-vat").textContent = vatAmount.toFixed(2);
+    document.getElementById("output-total").textContent = totalPrice.toFixed(2);
+}
+
 ```
-[รูปผลการทดลองที่ 2.2]
+![gard1](https://github.com/user-attachments/assets/9417b19b-56dc-4539-829e-69797ec8932a)
+![vat1](https://github.com/user-attachments/assets/3740111e-a6dc-454c-8479-1519a683d0fa)
+
 
 ### 2.3 การควบคุมการทำงาน
 
