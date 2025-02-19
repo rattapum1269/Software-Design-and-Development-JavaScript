@@ -185,9 +185,76 @@ let person = {
 
 ### บันทึกผลการทดลอง 2.1
 ```html
-[บันทึกโค้ด ที่นี่]
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อมูลนักศึกษา</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h2>ข้อมูลนักศึกษา</h2>
+        <p><strong>รหัสนักศึกษา:</strong> <span id="student-id"></span></p>
+        <p><strong>ชื่อ:</strong> <span id="student-name"></span></p>
+        <p><strong>สาขา:</strong> <span id="student-major"></span></p>
+        <p><strong>เกรดเฉลี่ย:</strong> <span id="student-gpa"></span></p>
+
+        <h3>ใส่คะแนนสอบ</h3>
+        <label>คะแนนสอบกลางภาค: <input type="number" id="midterm-input" min="0" max="100"></label><br>
+        <label>คะแนนสอบปลายภาค: <input type="number" id="final-input" min="0" max="100"></label><br>
+        <button onclick="calculate()">คำนวณเกรด</button>
+
+        <h3>ผลลัพธ์</h3>
+        
+        <p><strong>เกรดที่ได้:</strong> <span id="grade">-</span></p>
+    </div>
+
+    <script src="stu.js"></script>
+</body>
+</html>
+
+stu.js
+// ข้อมูลนักศึกษา
+const student = {
+    id: "64000123",
+    name: "สมชาย ใจดี",
+    major: "วิทยาการคอมพิวเตอร์",
+    gpa: 3.75
+};
+
+// แสดงข้อมูลนักศึกษาในหน้า HTML
+document.getElementById("student-id").textContent = student.id;
+document.getElementById("student-name").textContent = student.name;
+document.getElementById("student-major").textContent = student.major;
+document.getElementById("student-gpa").textContent = student.gpa;
+
+// ฟังก์ชันคำนวณเกรด
+function calculateGrade(score) {
+    if (score >= 90) return "A";
+    else if (score >= 80) return "B";
+    else if (score >= 70) return "C";
+    else if (score >= 60) return "D";
+    else return "F";
+}
+
+// ฟังก์ชันคำนวณคะแนนและแสดงผล
+function calculate() {
+    let midterm = parseFloat(document.getElementById("midterm-input").value) || 0;
+    let final = parseFloat(document.getElementById("final-input").value) || 0;
+    let total = midterm + final;
+    let grade = calculateGrade(total);
+
+    // แสดงผลใน HTML
+    document.getElementById("total-score").textContent = total;
+    document.getElementById("grade").textContent = grade;
+}
+
+
 ```
-[รูปผลการทดลองที่ 2.1]
+![stu](https://github.com/user-attachments/assets/8b3e9f72-946d-4883-9898-7efc470a06a2)
+
 
 
 ### 2.2 การดำเนินการทางคณิตศาสตร์
