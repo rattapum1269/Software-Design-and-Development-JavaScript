@@ -524,9 +524,39 @@ for (let i = 1; i <= 5; i++) {
 
 ### บันทึกผลการทดลอง 2.3
 ```html
-[บันทึกโค้ด ที่นี่]
+1. กำหนดตัวเลข และตรวจสอบว่าตัวเลขที่กำหนดเป็นเลขคู่หรือเลขคี่
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    
+    <title>ตรวจสอบเลขคู่หรือเลขคี่</title>
+</head>
+<body>
+    <h2>ตรวจสอบเลขคู่หรือเลขคี่</h2>
+    
+    <input type="number" id="numInput" placeholder="กรอกตัวเลข">  
+    <button onclick="checkEvenOdd()">ตรวจสอบ</button>
+    <p id="result"></p>
+    <script>
+        function checkEvenOdd() {
+            let number = document.getElementById("numInput").value;
+            let resultText = "";
+            if (number === "") {
+                resultText = "กรุณากรอกตัวเลข";
+            } else if (number % 2 === 0) {
+                resultText = number + " เป็นเลขคู่";
+            } else {
+                resultText = number + " เป็นเลขคี่";
+            }
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>
+
 ```
 [รูปผลการทดลองที่ 2.3]
+![jj](https://github.com/user-attachments/assets/b5478f33-f4e2-471b-a284-2b9f411f61c1)
 
 ### 2.4 Functions และ Arrow Functions
 
