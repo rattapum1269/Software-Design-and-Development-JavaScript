@@ -780,9 +780,139 @@ process(function() {
 
 ### บันทึกผลการทดลอง 2.4.1
 ```html
-[บันทึกโค้ด ที่นี่]
+1. สร้าง function คำนวณค่า BMI (ดัชนีมวลกาย) จากน้ำหนักและส่วนสูง
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณค่า BMI</title>
+</head>
+<body>
+    <h1>คำนวณค่า BMI </h1>
+
+    <label for="weight">น้ำหนัก (kg): </label>
+    <input type="number" id="weight" name="weight" step="0.1"><br><br>
+
+    <label for="height">ส่วนสูง (cm): </label>
+    <input type="number" id="height" name="height" step="0.1"><br><br>
+
+    <button onclick="calculateBMI()">คำนวณ BMI</button>
+
+    <p id="result"></p>
+
+    <script>
+        // ฟังก์ชั่นคำนวณค่า BMI
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById("weight").value);
+            const height = parseFloat(document.getElementById("height").value);
+
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                document.getElementById("result").innerText = "กรอกข้อมูลน้ำหนักและส่วนสูงที่ถูกต้อง";
+                return;
+            }
+
+            // เปลี่ยนส่วนสูงจาก cm เป็น m
+            const heightInMeters = height / 100;
+
+            // คำนวณค่า BMI
+            const bmi = weight / (heightInMeters * heightInMeters);
+
+            // แสดงผลลัพธ์
+            document.getElementById("result").innerText = `ค่า BMI ของคุณคือ: ${bmi.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
+2. สร้าง function ที่รับชื่อและอายุ แล้วแสดงข้อความทักทายที่เหมาะสมกับอายุ
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทักทายตามอายุ</title>
+</head>
+<body>
+    <h1>ทักทายตามอายุ</h1>
+
+    <label for="name">ชื่อ: </label>
+    <input type="text" id="name" name="name"><br><br>
+
+    <label for="age">อายุ: </label>
+    <input type="number" id="age" name="age"><br><br>
+
+    <button onclick="greetBasedOnAge()">ทักทาย</button>
+
+    <p id="greeting"></p>
+
+    <script>
+        // ฟังก์ชั่นทักทายตามอายุ
+        function greetBasedOnAge() {
+            const name = document.getElementById("name").value;
+            const age = parseInt(document.getElementById("age").value);
+            let greetingMessage = "";
+
+            if (name === "" || isNaN(age) || age <= 0) {
+                greetingMessage = "กรุณากรอกชื่อและอายุที่ถูกต้อง";
+            } else {
+                if (age <= 12) {
+                    greetingMessage = `อาบู้ๆ ${name}ไอตัวเล็ก`;
+                } else if (age <= 19) {
+                    greetingMessage = `ฮายๆ ${name}มาตอแหลหรอเราอะ`;
+                } else if (age <= 59) {
+                    greetingMessage = `สวัสดีครับ/ค่ะ, ${name}! ขอตังค์ค้าบบบบ`;
+                } else {
+                    greetingMessage = `สวัสดีค้าบ ${name}คุณตา/ยาย`;
+                }
+            }
+
+            document.getElementById("greeting").innerText = greetingMessage;
+        }
+    </script>
+</body>
+</html>
+3. เขียน function ตรวจสอบรหัสผ่านว่ามีความยาวมากกว่า 8 ตัวอักษรหรือไม่
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตรวจสอบรหัสผ่าน</title>
+</head>
+<body>
+    <h1>ตรวจสอบรหัสผ่าน</h1>
+
+    <label for="password">กรอกรหัสผ่าน: </label>
+    <input type="password" id="password" name="password"><br><br>
+
+    <button onclick="checkPasswordLength()">ตรวจสอบ</button>
+
+    <p id="result"></p>
+
+    <script>
+        // ฟังก์ชั่นตรวจสอบรหัสผ่าน
+        function checkPasswordLength() {
+            const password = document.getElementById("password").value;
+            let message = "";
+
+            if (password.length > 8) {
+                message = "รหัสผ่านมีความยาวมากกว่า 8 ตัวอักษร";
+            } else {
+                message = "นับเลขไม่เป็นหรออ";
+            }
+
+            document.getElementById("result").innerText = message;
+        }
+    </script>
+</body>
+</html>
+
 ```
 [รูปผลการทดลองที่ 2.4.1]
+![bmi](https://github.com/user-attachments/assets/d6811bec-ca08-4386-9886-78500922b4b0)
+![pass2](https://github.com/user-attachments/assets/4c0e7d97-14f9-4c0a-9a5f-2924cee19177)
+![pass1](https://github.com/user-attachments/assets/2f7134fb-6f96-4f0d-977b-7ed6277ceeb1)
+![talk](https://github.com/user-attachments/assets/f6c6b603-1856-478a-aff1-a41b7c090050)
 
 
 
