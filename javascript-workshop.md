@@ -553,10 +553,122 @@ for (let i = 1; i <= 5; i++) {
     </script>
 </body>
 </html>
+2. สร้าง loop แบบ for แสดงตารางสูตรคูณ แม่ 2 และ loop แบบ while แสดงสูตรคูณ แม่ 3
+<!DOCTYPE html>
+<html lang="th">
+<head>
+   
+    <title>Basic JavaScript Tasks</title>
+</head>
+<body>
+    <h2>กรอกแม่สูตรคูณ</h2>
+    <input type="number" id="multiplicationInput" placeholder="กรอกแม่สูตรคูณ">
+    <button onclick="generateMultiplicationTable()">แสดงผล</button>
+    <ul id="multiplicationTable"></ul>
+    
+    <script>
+        function generateMultiplicationTable() {
+            let number = parseInt(document.getElementById("multiplicationInput").value);
+            let table = document.getElementById("multiplicationTable");
+            table.innerHTML = ""; // ล้างค่าก่อนหน้า
+            
+            if (number === 2) {
+                // ใช้ For Loop สำหรับแม่ 2
+                for (let i = 1; i <= 12; i++) {
+                    let li = document.createElement("li");
+                    li.innerText = `${number} x ${i} = ${number * i}`;
+                    table.appendChild(li);
+                }
+            } else if (number === 3) {
+                // ใช้ While Loop สำหรับแม่ 3
+                let j = 1;
+                while (j <= 12) {
+                    let li = document.createElement("li");
+                    li.innerText = `${number} x ${j} = ${number * j}`;
+                    table.appendChild(li);
+                    j++;
+                }
+            } else {
+                let li = document.createElement("li");
+                li.innerText = "กรุณากรอกเฉพาะแม่ 2 หรือ 3";
+                table.appendChild(li);
+            }
+        }
+    </script>
 
+</body>
+</html>
+3. เขียนโปรแกรมนับถอยหลังจาก 10 ถึง 1
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic JavaScript Tasks</title>
+</head>
+<body>
+    <h2>นับถอยหลังจาก 10 ถึง 1</h2>
+    <button onclick="countdown()">ชีวิตจะจบลงในอีก</button>
+    <ul id="countdownList"></ul>
+<script>
+    function countdown() {
+        let list = document.getElementById("countdownList");
+        list.innerHTML = ""; // ล้างค่าก่อนหน้า
+        
+        for (let i = 10; i >= 1; i--) {
+            let li = document.createElement("li");
+            li.innerText = i;
+            list.appendChild(li);
+        }
+    }
+</script>
+</body>
+</html>
+4. เขียนโปรแกรมกำหนดอายุ และตรวจสอบช่วงวัยตามอายุที่กำหนด (กำหนดอายุแต่ละช่วงวัย วัยเด็ก วัยรุ่น วัยผู้ใหญ่)
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตรวจสอบช่วงวัย</title>
+</head>
+<body>
+    <h1>ตรวจสอบช่วงวัยตามอายุ</h1>
+
+    <label for="age">กรุณากรอกอายุ: </label>
+    <input type="number" id="age" name="age">
+    <button onclick="checkAgeGroup()">ตรวจสอบ</button>
+
+    <p id="result"></p>
+
+    <script>
+        function checkAgeGroup() {
+            const age = document.getElementById("age").value;
+            let result = "";
+
+            if (age >= 0 && age <= 12) {
+                result = "วัยเด็ก";
+            } else if (age >= 13 && age <= 19) {
+                result = "วัยรุ่น";
+            } else if (age >= 20 && age <= 59) {
+                result = "ผู้ใหญ่!!!";
+            } else if (age >= 60 && age <=120) {
+                result = "แก่ค่าา!!";
+            } else {
+                result = "อายุผีหรือ";
+            }
+
+            document.getElementById("result").innerText = result;
+        }
+    </script>
 ```
 [รูปผลการทดลองที่ 2.3]
 ![jj](https://github.com/user-attachments/assets/b5478f33-f4e2-471b-a284-2b9f411f61c1)
+![k2](https://github.com/user-attachments/assets/0f3f8408-91f2-4fa3-8314-150d5df92867)
+![k1](https://github.com/user-attachments/assets/4d77c274-9363-40c3-a1f7-60c20778b736)
+![l](https://github.com/user-attachments/assets/edf726ec-302c-41d9-8fc4-b9967bb343db)
+![age](https://github.com/user-attachments/assets/1f1f6c58-255a-4d20-9e05-f2c02bef8186)
 
 ### 2.4 Functions และ Arrow Functions
 
