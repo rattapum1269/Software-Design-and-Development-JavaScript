@@ -953,9 +953,129 @@ console.log("เลขคู่:", evenNumbers); // [2, 4]
 
 ### บันทึกผลการทดลอง 2.4.2
 ```html
-[บันทึกโค้ด ที่นี่]
+สร้าง function คำนวณค่า BMI (ดัชนีมวลกาย) จากน้ำหนักและส่วนสูง
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณค่า BMI</title>
+</head>
+<body>
+    <h1>คำนวณค่า BMI (ดัชนีมวลกาย)</h1>
+
+    <label for="weight">น้ำหนัก (kg): </label>
+    <input type="number" id="weight" name="weight" step="0.1"><br><br>
+
+    <label for="height">ส่วนสูง (cm): </label>
+    <input type="number" id="height" name="height" step="0.1"><br><br>
+
+    <button onclick="calculateBMI()">คำนวณ BMI</button>
+
+    <p id="result"></p>
+
+    <script>
+        // ฟังก์ชั่นคำนวณค่า BMI (ใช้ Arrow Function)
+        const calculateBMI = () => {
+            const weight = parseFloat(document.getElementById("weight").value);
+            const height = parseFloat(document.getElementById("height").value);
+
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                document.getElementById("result").innerText = "กรุณากรอกข้อมูลน้ำหนักและส่วนสูงที่ถูกต้อง";
+                return;
+            }
+
+            const heightInMeters = height / 100;  // เปลี่ยนส่วนสูงจาก cm เป็น m
+            const bmi = weight / (heightInMeters * heightInMeters);  // คำนวณ BMI
+
+            document.getElementById("result").innerText = `ค่า BMI ของคุณคือ: ${bmi.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
+สร้าง function ที่รับชื่อและอายุ แล้วแสดงข้อความทักทายที่เหมาะสมกับอายุ
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทักทายตามอายุ</title>
+</head>
+<body>
+    <h1>ทักทายตามอายุ</h1>
+
+    <label for="name">ชื่อ: </label>
+    <input type="text" id="name" name="name"><br><br>
+
+    <label for="age">อายุ: </label>
+    <input type="number" id="age" name="age"><br><br>
+
+    <button onclick="greetBasedOnAge()">ทักทาย</button>
+
+    <p id="greeting"></p>
+
+    <script>
+        // ฟังก์ชั่นทักทายตามอายุ (ใช้ Arrow Function)
+        const greetBasedOnAge = () => {
+            const name = document.getElementById("name").value;
+            const age = parseInt(document.getElementById("age").value);
+            let greetingMessage = "";
+
+            if (name === "" || isNaN(age) || age <= 0) {
+                greetingMessage = "กรุณากรอกชื่อและอายุที่ถูกต้อง";
+            } else {
+                greetingMessage = age <= 12 ? 
+                    `ไงตัวเล็ก ${name}!` : 
+                    age <= 19 ? 
+                    `ไง ${name}! ` : 
+                    age <= 59 ? 
+                    `สวัสดีครับ ${name}! คุณอา` : 
+                    `สวัสดีครับ${name}! คุณปู่`;
+            }
+
+            document.getElementById("greeting").innerText = greetingMessage;
+        }
+    </script>
+</body>
+</html>
+
+3. เขียน function ตรวจสอบรหัสผ่านว่ามีความยาวมากกว่า 8 ตัวอักษรหรือไม่
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตรวจสอบรหัสผ่าน</title>
+</head>
+<body>
+    <h1>ตรวจสอบรหัสผ่าน</h1>
+
+    <label for="password">กรอกรหัสผ่าน: </label>
+    <input type="password" id="password" name="password"><br><br>
+
+    <button onclick="checkPasswordLength()">ตรวจสอบ</button>
+
+    <p id="result"></p>
+
+    <script>
+        // ฟังก์ชั่นตรวจสอบรหัสผ่าน (ใช้ Arrow Function)
+        const checkPasswordLength = () => {
+            const password = document.getElementById("password").value;
+            let message = password.length > 8 ? 
+                "รหัสผ่านมีความยาวมากกว่า 8 ตัวอักษร" : 
+                "รหัสผ่านต้องมีความยาวมากกว่า 8 ตัวอักษร";
+
+            document.getElementById("result").innerText = message;
+        }
+    </script>
+</body>
+</html>
+
 ```
 [รูปผลการทดลองที่ 2.4.2]
+![bmi1](https://github.com/user-attachments/assets/85a7546d-1c58-41f2-affd-0018ea0fcec1)
+![talk1](https://github.com/user-attachments/assets/1862c6d1-9658-48e5-a488-dd760006405b)
+![Screenshot 2025-02-21 204053](https://github.com/user-attachments/assets/94f14de2-c2a2-48f1-8b00-2fa1684d33f0)
 
 
 ## การทดลองที่ 3 : การใช้ JavaScript กับ HTML และ CSS
