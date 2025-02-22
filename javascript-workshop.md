@@ -1143,9 +1143,81 @@ console.log("เลขคู่:", evenNumbers); // [2, 4]
 
 ### บันทึกผลการทดลอง 3.1
 ```html
-[บันทึกโค้ด ที่นี่]
+<!DOCTYPE html>
+<html lang="th">
+<head>
+   
+    <title>คำนวณ BMI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #815151;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input {
+            margin: 10px 0;
+            padding: 8px;
+            width: 80%;
+        }
+        button {
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>คำนวณค่า BMI</h2>
+        <input type="number" id="weight" placeholder="น้ำหนัก (กิโลกรัม)" />
+        <input type="number" id="height" placeholder="ส่วนสูง (เซนติเมตร)" />
+        <button onclick="calculateBMI()">คำนวณ</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const calculateBMI = () => {
+            let weight = parseFloat(document.getElementById("weight").value);
+            let height = parseFloat(document.getElementById("height").value) / 100;
+            
+            if (!weight || !height) {
+                document.getElementById("result").innerText = "กรุณากรอกข้อมูลให้ครบถ้วน";
+                return;
+            }
+            
+            let bmi = weight / (height * height);
+            let status = bmi < 18.5 ? "ผอม" : bmi < 24.9 ? "สมส่วน" : "อ้วน";
+            
+            document.getElementById("result").innerText = `BMI: ${bmi.toFixed(2)} - ${status}`;
+        };
+    </script>
+</body>
+</html>
+
+
 ```
 [รูปผลการทดลองที่ 3.1]
+![bmi2](https://github.com/user-attachments/assets/b5205563-5d63-4268-a73e-07a1d446e0e1)
 
 ## การทดลองที่ 3.2 : การสร้างฟอร์มสำหรับจองห้องพัก
 การสร้างฟอร์มลงทะเบียนเพื่อรวบรวมข้อมูลที่จำเป็นสำหรับการจองห้องพัก
