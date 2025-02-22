@@ -1615,9 +1615,198 @@ console.log("เลขคู่:", evenNumbers); // [2, 4]
 
 ### บันทึกผลการทดลอง 3.2.3
 ```html
-[บันทึกโค้ด ที่นี่]
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจองห้องพักออนไลน์</title>
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #eae0c8;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #5c4a3d;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #f5f1e3;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #6b5b4b;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #b5a897;
+            border-radius: 4px;
+            box-sizing: border-box;
+            display: block;
+            background-color: #faf7f0;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #8c7b6d;
+            box-shadow: 0 0 5px rgba(140,123,109,0.5);
+        }
+
+        button {
+            background-color: #8c6e5d;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #735b4a;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            form {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>แบบฟอร์มจองห้องพัก</h1>
+    
+    <form id="bookingForm">
+        <div>
+            <label for="fullname">ชื่อ-นามสกุล:</label>
+            <input type="text" id="fullname" name="fullname" required>
+        </div>
+
+        <div>
+            <label for="email">อีเมล:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+            <label for="phone">เบอร์โทรศัพท์:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div>
+            <label for="checkin">วันที่เช็คอิน:</label>
+            <input type="date" id="checkin" name="checkin" required>
+        </div>
+
+        <div>
+            <label for="checkout">วันที่เช็คเอาท์:</label>
+            <input type="date" id="checkout" name="checkout" required>
+        </div>
+
+        <div>
+            <label for="roomtype">ประเภทห้องพัก:</label>
+            <select id="roomtype" name="roomtype" required>
+                <option value="">กรุณาเลือกประเภทห้องพัก</option>
+                <option value="standard">ห้องมาตรฐาน</option>
+                <option value="deluxe">ห้องดีลักซ์</option>
+                <option value="suite">ห้องสวีท</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="guests">จำนวนผู้เข้าพัก:</label>
+            <input type="number" id="guests" name="guests" min="1" max="4" required>
+        </div>
+
+        <button type="submit">จองห้องพัก</button>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('bookingForm');
+            const checkinInput = document.getElementById('checkin');
+            const checkoutInput = document.getElementById('checkout');
+            const phoneInput = document.getElementById('phone');
+            const roomTypeSelect = document.getElementById('roomtype');
+            const guestsInput = document.getElementById('guests');
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const checkin = new Date(checkinInput.value);
+                const checkout = new Date(checkoutInput.value);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                if (checkin < today) {
+                    alert('กรุณาเลือกวันเช็คอินที่ยังไม่ผ่านมา');
+                    return;
+                }
+                
+                if (checkout <= checkin) {
+                    alert('วันเช็คเอาท์ต้องมาหลังวันเช็คอิน');
+                    return;
+                }
+                
+                const phoneRegex = /^[0-9]{10}$/;
+                if (!phoneRegex.test(phoneInput.value)) {
+                    alert('กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (10 หลัก)');
+                    return;
+                }
+                
+                const days = (checkout - checkin) / (1000 * 60 * 60 * 24);
+                const roomtypeText = roomTypeSelect.options[roomTypeSelect.selectedIndex].text;
+                
+                if (confirm(`สรุปการจอง:\n- ชื่อ: ${form.fullname.value}\n- ห้อง: ${roomtypeText}\n- เช็คอิน: ${checkin.toLocaleDateString('th-TH')}\n- เช็คเอาท์: ${checkout.toLocaleDateString('th-TH')}\n- จำนวนวัน: ${days} วัน\n- จำนวนผู้เข้าพัก: ${guestsInput.value} ท่าน\n\nยืนยันการจอง?`)) {
+                    alert('จองห้องพักเรียบร้อยแล้ว');
+                    form.reset();
+                }
+            });
+
+            checkinInput.addEventListener('change', () => {
+                checkoutInput.min = checkinInput.value;
+            });
+
+            roomTypeSelect.addEventListener('change', () => {
+                guestsInput.max = { standard: 2, deluxe: 3, suite: 4 }[roomTypeSelect.value] || 4;
+                if (guestsInput.value > guestsInput.max) guestsInput.value = guestsInput.max;
+            });
+        });
+    </script>
+</body>
+</html>
+1.Refactor การดึง Element: ใช้ document.addEventListener('DOMContentLoaded', () => { ... }) เพื่อให้ script ทำงานหลังจาก DOM โหลดเสร็จแล้ว
+2.ใช้ const แทน document.getElementById 
+3.ใช้ today.setHours(0, 0, 0, 0); เพื่อลดความคลาดเคลื่อนของเวลา
+4.เพิ่มเงื่อนไขการเปลี่ยนแปลงค่า checkout.min เมื่อ checkin เปลี่ยน
+ใช้ confirm() และ alert() ให้แสดงผลชัดเจนขึ้น แสดงข้อมูลการจองที่อ่านง่าย
+
 ```
 [รูปผลการทดลองที่ 3.2.3]
+![Screenshot 2025-02-22 155354](https://github.com/user-attachments/assets/7f8d8c7a-cd87-4ab6-9a4c-ce0abf83037e)
 
 
 ## คำแนะนำเพิ่มเติม
